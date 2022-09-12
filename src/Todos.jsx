@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { CircularProgress } from "@mui/material";
+import { TodoCard } from "./TodoCard";
 
 const Todos = () => {
   const [todos, setTodos] = useState();
@@ -17,16 +18,10 @@ const Todos = () => {
   return (
     <>
       {todos ? (
-        <div>
-          {todos.map((todo) => {
-            const { title, completed } = todo;
-            return (
-              <div>
-                <h3>{title}</h3>
-                <h2>{`Completed: ${completed}`}</h2>
-              </div>
-            );
-          })}
+        <div style = {{display: "flex", flexWrap: "wrap" }}>
+            {/* grab first 10 with slice map over from prop passed to ToDoCard */}
+          {todos.slice(0,10).map((todo) => <TodoCard todo = {todo}/>
+          )}
         </div>
       ) : (
         <CircularProgress />
